@@ -127,7 +127,7 @@ def search_tf_idf(query, index, idf, tf, title_index):
     query = preprocess_text(query)        # we use the same function to preprocess the queries(as the tweets) -> returns tokens
     # print(f"Preprocessed Query: {query}")
 
-    docs = set()
+    docs = None
     for term in query:
         if term in index:
             term_docs_search = [posting[0] for posting in index[term]]
@@ -138,7 +138,7 @@ def search_tf_idf(query, index, idf, tf, title_index):
                 docs = term_docs_set  # Initialize docs with the first term's results
             else:
                 docs &= term_docs_set  # Intersection to keep only docs containing all terms
-
+                
     docs = list(docs)
 
     return docs
@@ -182,10 +182,6 @@ def search_in_corpus(corpus, query, search_id):
         if not item:
             continue  # Skip if metadata for the document is missing
 
-        # title = title_index[doc_id]
-        # description = "Description for document {}".format(doc_id)  # Add meaningful descriptions if available
-        # doc_date = "2024-01-01"  # Replace with actual document date if available
-        # url = "doc_details?id={}&search_id={}&param2=2".format(doc_id, search_id)
         res.append(ResultItem(
             id=item.id,
             title=item.title,

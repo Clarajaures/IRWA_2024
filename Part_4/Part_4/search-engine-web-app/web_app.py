@@ -111,15 +111,32 @@ def doc_details():
     p2 = int(request.args["param2"])  # transform to Integer
     print("click in id={}".format(clicked_doc_id))
 
+    twt = list(corpus.values())[p1]
+    #print("The document title is:", twt)
+
+    doc = Document(
+        id=twt["id"],
+        title=twt["title"],
+        description=twt["description"],
+        doc_date=twt["doc_date"],
+        likes=twt["likes"],
+        retweets=twt["retweets"],
+        url=twt["url"],
+        hashtags=twt["hashtags"]
+    )
+    #clicked_tweet = Document(p1, twt[1], twt[2], twt[3], twt[4], twt[5], twt[6], twt[7])
+
+
+
     # store data in statistics table 1
-    if clicked_doc_id in analytics_data.fact_clicks.keys():
-        analytics_data.fact_clicks[clicked_doc_id] += 1
-    else:
-        analytics_data.fact_clicks[clicked_doc_id] = 1
+    #if clicked_doc_id in analytics_data.fact_clicks.keys():
+    #    analytics_data.fact_clicks[clicked_doc_id] += 1
+    #else:
+    #    analytics_data.fact_clicks[clicked_doc_id] = 1
 
-    print("fact_clicks count for id={} is {}".format(clicked_doc_id, analytics_data.fact_clicks[clicked_doc_id]))
+    #print("fact_clicks count for id={} is {}".format(clicked_doc_id, analytics_data.fact_clicks[clicked_doc_id]))
 
-    return render_template('doc_details.html')
+    return render_template('doc_details_2.html', Tweet_result = doc)
 
 
 @app.route('/stats', methods=['GET'])

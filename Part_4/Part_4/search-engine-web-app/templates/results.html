@@ -6,18 +6,17 @@
     {% for item in results_list %}
         <div class="pb-3">
             <div class="doc-title">
-                <a href="{{ item.url }}">{{ item.title }}...
-                </a>
+                <p><strong>Title:</strong> {{ item.title }}</p>
             </div>
             <div class="cited">
                 <cite> <a href="{{ item.url }}">{{ item.url }}</a></cite>
             </div>
             <div class="doc-desc">
-                {{ item.doc_date }} — {{ item.description }}
+                {{ item.doc_date }}<br>
+                Tweet: {{ item.description }}
             </div>
 
         </div>
 
     {% endfor %}
 {% endblock %}
-

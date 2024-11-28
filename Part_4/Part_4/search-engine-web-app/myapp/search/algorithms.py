@@ -166,7 +166,7 @@ def search_in_corpus(corpus, query, search_id):
     print('title: {}'.format(title_5_items))
     
     docs_ids = search_tf_idf(query, index, idf, tf, title_index)
-    print(f"Document IDs from search: {docs_ids}")
+    #print(f"Document IDs from search: {docs_ids}")
     
     if not docs_ids:
         print("No results found, try again.")

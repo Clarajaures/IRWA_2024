@@ -67,7 +67,7 @@ def index():
     agent = httpagentparser.detect(user_agent)
 
     print("Remote IP: {} - JSON user browser {}".format(user_ip, agent))
-
+    analytics_data.save_session_terms(user_ip,agent)
     print(session)
 
     return render_template('index.html', page_title="Welcome")
@@ -83,7 +83,8 @@ def search_form_post():
 
     results = search_engine.search(search_query, search_id, corpus)
     
-    print(results[0])
+    print("THIS IS THE FIRST RESULT",results[0])
+
 
     found_count = len(results)
     session['last_found_count'] = found_count
@@ -129,12 +130,13 @@ def doc_details():
 
 
     # store data in statistics table 1
-    #if clicked_doc_id in analytics_data.fact_clicks.keys():
-    #    analytics_data.fact_clicks[clicked_doc_id] += 1
-    #else:
-    #    analytics_data.fact_clicks[clicked_doc_id] = 1
+    if clicked_doc_id in analytics_data.fact_clicks.keys():
+        analytics_data.fact_clicks[clicked_doc_id] += 1
+    else:
+        analytics_data.fact_clicks[clicked_doc_id] = 1
+    analytics_data.save_clicks()
 
-    #print("fact_clicks count for id={} is {}".format(clicked_doc_id, analytics_data.fact_clicks[clicked_doc_id]))
+    print("fact_clicks count for id={} is {}".format(clicked_doc_id, analytics_data.fact_clicks[clicked_doc_id]))
 
     return render_template('doc_details_2.html', Tweet_result = doc)
 
@@ -145,10 +147,7 @@ def stats():
     Show simple statistics example. ### Replace with dashboard ###
     :return:
     """
-
     docs = []
-    # ### Start replace with your code ###
-
     for doc_id in analytics_data.fact_clicks:
         row: Document = corpus[int(doc_id)]
         count = analytics_data.fact_clicks[doc_id]

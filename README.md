@@ -7,5 +7,6 @@ First, download the folder on the GitHub repo called "part-4" containing all the
 
     o	The second file is named "IRWA-2024-u199904-u198730-u198738-part-4." This is the PDF with all the explanations, our results of the lab, and the procedure that we followed to complete everything.
 
+You will need to add farmers-protest-tweets.json because due to its size we cannot commit the lab
 
 With all done you can see our evolution of the projects and each part what we achieve and develope to obatin this final part 4.
